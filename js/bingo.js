@@ -45,10 +45,10 @@ export default class Bingo {
   renderCards() {
     // this function renders the cards to the screen
     console.log("rendering cards");
-    this.cards.foreach((card, index) => {
-        let card = new Card(card);
-        card.render(index);
-    });
+    for(let i = 0; i < this.cards.length; i++) {
+      let card = new Card(this.cards[i]);
+      card.render(i);
+    }
 
     // 🔥🔥🔥 TODO 2
     // loop through all the cards in the array and create a new instance of a Card()
@@ -84,10 +84,17 @@ export default class Bingo {
     let cardsWon = [];
     console.log("Saving bingo to localstorage");
     // let cards = document.querySelectorAll(".bingo__card--done");
-
+    let cards = document.querySelectorAll(".bingo__card--done");
+    for (let i = 0; i < cards.length; i++) {
+      cardsWon.push(cards[i].dataset.number);
+    }
+    localStorage.setItem("bingo", JSON.stringify(cardsWon));
     // if there are not done cards, remove localstorage
     // if (cards.length === 0) {
     // remove localstorage
+    if (cards.length === 0) {
+      localStorage.removeItem("bingo");
+    }
     // }
 
     // save a selection like [1, 7, 8] to localstorage item "bingo"
