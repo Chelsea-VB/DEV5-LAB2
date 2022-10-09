@@ -49,7 +49,6 @@ export default class Bingo {
       let card = new Card(this.cards[i]);
       card.render(i);
     }
-
     // 🔥🔥🔥 TODO 2
     // loop through all the cards in the array and create a new instance of a Card()
     // for()
@@ -96,7 +95,6 @@ export default class Bingo {
       localStorage.removeItem("bingo");
     }
     // }
-
     // save a selection like [1, 7, 8] to localstorage item "bingo"
     // you might want to check out how JSON.stringify() works
   }
@@ -110,6 +108,11 @@ export default class Bingo {
 
     // check if localstorage item exists
     if (localStorage.getItem("bingo")) {
+      let cardsWon = JSON.parse(localStorage.getItem("bingo"));
+      for (let i = 0; i < cardsWon.length; i++) {
+        let card = document.querySelector(`[data-number="${cardsWon[i]}"]`);
+        card.classList.add("bingo__card--done");
+      }
       // let cardsWon = JSON.parse();
       // JSON.parse() will convert the string [1, 7, 8] back to an array which you can loop
       // loop over the numbers 1, 7, 8 and mark those cards as done by adding the right CSS class
